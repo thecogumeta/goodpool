@@ -1,0 +1,37 @@
+{
+  "name": "@rbxts/goodpool",
+  "version": "1.1.0",
+  "description": "A simple, flexible, and lightweight object pooling module for Roblox that works with any type of object, not just Instances.",
+  "main": "lib/init.luau",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecogumeta/goodpool.git"
+  },
+  "keywords": [
+    "roblox",
+    "roblox-ts",
+    "rbxts",
+    "pooling",
+    "object-pool",
+    "luau"
+  ],
+  "author": "Cogu ( @thecogumeta )",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecogumeta/goodpool/issues"
+  },
+  "homepage": "https://github.com/thecogumeta/goodpool#readme",
+  "peerDependencies": {
+    "@rbxts/types": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

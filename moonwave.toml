@@ -1,0 +1,23 @@
+title = "GoodPool"
+gitRepoUrl = "https://github.com/thecogumeta/goodpool"
+gitSourceBranch = "main"
+
+[docusaurus]
+onBrokenLinks = "throw"
+onBrokenMarkdownLinks = "warn"
+
+[home]
+enabled = true
+includeReadme = true
+
+[[home.features]]
+title = "Generic Object Pooling"
+description = "GoodPool is fully generic, allowing you to pool any type of object. Tables, custom objects, instances, and more can all be reused efficiently."
+
+[[home.features]]
+title = "Roblox Instance Support"
+description = "GoodPool includes built-in helpers for pooling Roblox Instances. Easily clone, reuse, and reset instances without constantly allocating new ones."
+
+[[home.features]]
+title = "Lightweight and Fast"
+description = "Designed for performance, GoodPool uses a minimal implementation with zero dependencies and efficient internal storage."

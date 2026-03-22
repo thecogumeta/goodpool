@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">GoodPool | GoodPool</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://thecogumeta.github.io/goodpool/api/GoodPool"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="GoodPool | GoodPool"><meta data-rh="true" name="description" content="A flexible and lightweight generic object pool.
+
+GoodPool allows you to reuse objects instead of repeatedly creating
+and destroying them. You provide a function to create the object,
+another to initialize it when acquired, and an optional one to
+destroy it when the pool is cleaned.
+```lua
+local tblPool = GoodPool.new(
+	function()
+		return { value = 10 }
+	end,
+	function(tbl)
+		tbl.value = 10
+	end
+)
+
+local obj = tblPool:Get()
+obj.value += 10
+print(obj.value) -- 20
+
+tblPool:Return(obj)
+print(tblPool:Get().value) -- 10
+```"><meta data-rh="true" property="og:description" content="A flexible and lightweight generic object pool.
+
+GoodPool allows you to reuse objects instead of repeatedly creating
+and destroying them. You provide a function to create the object,
+another to initialize it when acquired, and an optional one to
+destroy it when the pool is cleaned.
+```lua
+local tblPool = GoodPool.new(
+	function()
+		return { value = 10 }
+	end,
+	function(tbl)
+		tbl.value = 10
+	end
+)
+
+local obj = tblPool:Get()
+obj.value += 10
+print(obj.value) -- 20
+
+tblPool:Return(obj)
+print(tblPool:Get().value) -- 10
+```"><link data-rh="true" rel="canonical" href="https://thecogumeta.github.io/goodpool/api/GoodPool"><link data-rh="true" rel="alternate" href="https://thecogumeta.github.io/goodpool/api/GoodPool" hreflang="en"><link data-rh="true" rel="alternate" href="https://thecogumeta.github.io/goodpool/api/GoodPool" hreflang="x-default"><link rel="stylesheet" href="/goodpool/assets/css/styles.5cbed574.css">
+<script src="/goodpool/assets/js/runtime~main.921ec83d.js" defer="defer"></script>
+<script src="/goodpool/assets/js/main.fe89d446.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/goodpool/"><b class="navbar__title text--truncate">GoodPool</b></a><a class="navbar__item navbar__link" href="/goodpool/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/goodpool/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/thecogumeta/goodpool" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/goodpool/api/GoodPool">​Good​Pool</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Good</span><span style="display:inline-block">Pool</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>A flexible and lightweight generic object pool.</p>
+<p>
+  GoodPool allows you to reuse objects instead of repeatedly creating
+  and destroying them. You provide a function to create the object,
+  another to initialize it when acquired, and an optional one to
+  destroy it when the pool is cleaned.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> tblPool <span class="token operator">=</span> GoodPool<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span>
+	<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span> <span class="token punctuation">{</span> value <span class="token operator">=</span> <span class="token number">10</span> <span class="token punctuation">}</span>
+	<span class="token keyword">end</span><span class="token punctuation">,</span>
+	<span class="token keyword">function</span><span class="token punctuation">(</span>tbl<span class="token punctuation">)</span>
+		tbl<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">10</span>
+	<span class="token keyword">end</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> obj <span class="token operator">=</span> tblPool<span class="token punctuation">:</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+obj<span class="token punctuation">.</span>value <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">10</span>
+<span class="token function">print</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token comment">-- 20</span>
+
+tblPool<span class="token punctuation">:</span><span class="token function">Return</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>tblPool<span class="token punctuation">:</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token comment">-- 10</span>
+</code></pre>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a href="#new" class="hash-link" aria-label="Direct link to new" title="Direct link to new">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L55"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><div class="inset_uKQm"><div><code>createFn<!-- -->: </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called when the pool is empty and a new object is needed.</p>
+</span></span></div><div><code>initFn<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called every time an object is acquired. Use this to reset its state.</p>
+</span></span></div><div><code>destroyFn<!-- -->: </code><code class="purple_ieR2">(</code><code class="green_DgR4">(</code><code class="blue_P4bS">T</code><code class="green_DgR4">)</code><code class="green_DgR4"> → </code><code class="green_DgR4">(</code><code class="green_DgR4">)</code><code class="purple_ieR2">)</code><code class="blue_P4bS">?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called on each object when <code>Clean</code> is invoked. Use this to free resources.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/goodpool/api/GoodPool">GoodPool</a></code><code class="op_lSLc">&lt;</code><code class="blue_P4bS">T</code><code class="op_lSLc">&gt;</code></div><div>
+<p>Creates a new GoodPool.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="forInstance"><code style="text-decoration:none">forInstance</code><a href="#forInstance" class="hash-link" aria-label="Direct link to forInstance" title="Direct link to forInstance">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L97"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->.</code><code class="green_DgR4">forInstance</code><code>(</code><div class="inset_uKQm"><div><code>templateOrClassName<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>An existing Instance to clone, or a class name string to create one from.</p>
+</span></span></div><div><code>setupFn<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><span class="inlineDescription_G7Er">-- <span>
+<p>Called every time an Instance is acquired. Use this to reset its state.</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/goodpool/api/GoodPool">GoodPool</a></code><code class="op_lSLc">&lt;</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc">&gt;</code><code class="blue_P4bS">,</code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Instance" target="_blank" rel="noopener noreferrer">Instance<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div><div>
+<p>Creates a GoodPool that clones Instances from a template.</p>
+<p>
+  If a class name string is provided, a new Instance of that class is created
+  and used as the template. The template is returned alongside the pool so you
+  can reference it later regardless of how it was created.
+</p>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> ReplicatedStorage <span class="token operator">=</span> game<span class="token punctuation">:</span><span class="token function">GetService</span><span class="token punctuation">(</span><span class="token string">"ReplicatedStorage"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">local</span> partPool<span class="token punctuation">,</span> template <span class="token operator">=</span> GoodPool<span class="token punctuation">.</span><span class="token function">forInstance</span><span class="token punctuation">(</span>
+	ReplicatedStorage<span class="token punctuation">.</span>Part<span class="token punctuation">,</span>
+	<span class="token keyword">function</span><span class="token punctuation">(</span>part<span class="token punctuation">)</span>
+		part<span class="token punctuation">.</span>Transparency <span class="token operator">=</span> <span class="token number">0</span>
+		part<span class="token punctuation">.</span>Position <span class="token operator">=</span> Vector3<span class="token punctuation">.</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token keyword">end</span>
+<span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>template <span class="token operator">==</span> ReplicatedStorage<span class="token punctuation">.</span>Part<span class="token punctuation">)</span> <span class="token comment">-- true</span>
+
+<span class="token keyword">local</span> part <span class="token operator">=</span> partPool<span class="token punctuation">:</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+part<span class="token punctuation">.</span>Parent <span class="token operator">=</span> workspace
+
+partPool<span class="token punctuation">:</span><span class="token function">Return</span><span class="token punctuation">(</span>part<span class="token punctuation">)</span>
+</code></pre>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Get"><code style="text-decoration:none">Get</code><a href="#Get" class="hash-link" aria-label="Direct link to Get" title="Direct link to Get">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L137"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">Get</code><code>(</code><code>) → </code><code class="blue_P4bS">T</code></div><div>
+<p>Retrieves an object from the pool, passing it through <code>initFn</code> before returning.</p>
+<p>If the pool is empty, a new object is created via <code>createFn</code>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Preload"><code style="text-decoration:none">Preload</code><a href="#Preload" class="hash-link" aria-label="Direct link to Preload" title="Direct link to Preload">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L151"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">Preload</code><code>(</code><div class="inset_uKQm"><div><code>amount<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>Number of objects to pre-fill the pool with.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Pre-fills the pool with a given number of objects created via <code>createFn</code>.</p>
+<p>Useful for avoiding lag spikes on first use. Does nothing if <code>amount</code> is &#x3C;= 0.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Resize"><code style="text-decoration:none">Resize</code><a href="#Resize" class="hash-link" aria-label="Direct link to Resize" title="Direct link to Resize">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L172"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">Resize</code><code>(</code><div class="inset_uKQm"><div><code>newAmount<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The desired pool size.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Resizes the pool to the given amount.</p>
+<p>
+  If <code>newAmount</code> is greater than the current size, new objects are created via <code>Preload</code>.
+  If <code>newAmount</code> is less, excess objects are destroyed via <code>Clean</code>.
+  Does nothing if <code>newAmount</code> equals the current size.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Clean"><code style="text-decoration:none">Clean</code><a href="#Clean" class="hash-link" aria-label="Direct link to Clean" title="Direct link to Clean">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L197"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">Clean</code><code>(</code><div class="inset_uKQm"><div><code>amount<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>Number of objects to destroy. Defaults to all objects in the pool.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Destroys objects in the pool via <code>destroyFn</code>.</p>
+<p>
+  If <code>amount</code> is provided, only that many objects are destroyed.
+  Otherwise, the entire pool is cleared.
+</p>
+<p>Objects that are currently in use (i.e. not yet returned) are not affected.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="GetSize"><code style="text-decoration:none">GetSize</code><a href="#GetSize" class="hash-link" aria-label="Direct link to GetSize" title="Direct link to GetSize">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L213"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">GetSize</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Returns the number of objects currently sitting idle in the pool.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="IsEmpty"><code style="text-decoration:none">IsEmpty</code><a href="#IsEmpty" class="hash-link" aria-label="Direct link to IsEmpty" title="Direct link to IsEmpty">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L223"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">IsEmpty</code><code>(</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
+<p>Returns <code>true</code> if the pool has no objects available, <code>false</code> otherwise.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Return"><code style="text-decoration:none">Return</code><a href="#Return" class="hash-link" aria-label="Direct link to Return" title="Direct link to Return">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L238"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">Return</code><code>(</code><div class="inset_uKQm"><div><code>item<!-- -->: </code><code class="blue_P4bS">T</code><span class="inlineDescription_G7Er">-- <span>
+<p>The object to return.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Returns an object back to the pool so it can be reused later.</p>
+
+  
+    
+    
+      <div class="admonition admonition-caution alert alert--warning">
+        <div class="admonition-heading">
+          <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path>
+              </svg></span><span class="admonition-title">CAUTION</span></h5>
+        </div>
+        <div class="admonition-content">
+          <p>
+            This does not reset the object's state. State reset is handled by
+            <code>initFn</code> the next time the object is acquired via <code>Get</code>.
+          </p>
+        </div>
+      </div>
+    
+  
+
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ReturnList"><code style="text-decoration:none">ReturnList</code><a href="#ReturnList" class="hash-link" aria-label="Direct link to ReturnList" title="Direct link to ReturnList">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/thecogumeta/goodpool/blob/main/lib/init.luau#L254"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>GoodPool<!-- -->:</code><code class="green_DgR4">ReturnList</code><code>(</code><div class="inset_uKQm"><div><code>list<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>The objects to return to the pool.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Returns a list of objects back to the pool so they can be reused later.</p>
+
+  
+    
+    
+      <div class="admonition admonition-caution alert alert--warning">
+        <div class="admonition-heading">
+          <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path>
+              </svg></span><span class="admonition-title">CAUTION</span></h5>
+        </div>
+        <div class="admonition-content">
+          <p>
+            This does not reset the objects' state. State reset is handled by
+            <code>initFn</code> the next time each object is acquired via <code>Get</code>.
+          </p>
+        </div>
+      </div>
+    
+  
+
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;new&quot;,
+            &quot;desc&quot;: &quot;Creates a new GoodPool.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;createFn&quot;,
+                    &quot;desc&quot;: &quot;Called when the pool is empty and a new object is needed.&quot;,
+                    &quot;lua_type&quot;: &quot;() -&gt; T&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;initFn&quot;,
+                    &quot;desc&quot;: &quot;Called every time an object is acquired. Use this to reset its state.&quot;,
+                    &quot;lua_type&quot;: &quot;(T) -&gt; ()&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;destroyFn&quot;,
+                    &quot;desc&quot;: &quot;Called on each object when `Clean` is invoked. Use this to free resources.&quot;,
+                    &quot;lua_type&quot;: &quot;((T) -&gt; ())?&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;GoodPool&lt;T&gt;&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 55,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;forInstance&quot;,
+            &quot;desc&quot;: &quot;Creates a GoodPool that clones Instances from a template.\n\nIf a class name string is provided, a new Instance of that class is created\nand used as the template. The template is returned alongside the pool so you\ncan reference it later regardless of how it was created.\n```lua\nlocal ReplicatedStorage = game:GetService(\&quot;ReplicatedStorage\&quot;)\n\nlocal partPool, template = GoodPool.forInstance(\n\tReplicatedStorage.Part,\n\tfunction(part)\n\t\tpart.Transparency = 0\n\t\tpart.Position = Vector3.new(0, 0, 0)\n\tend\n)\n\nprint(template == ReplicatedStorage.Part) -- true\n\nlocal part = partPool:Get()\npart.Parent = workspace\n\npartPool:Return(part)\n```&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;templateOrClassName&quot;,
+                    &quot;desc&quot;: &quot;An existing Instance to clone, or a class name string to create one from.&quot;,
+                    &quot;lua_type&quot;: &quot;Instance | string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;setupFn&quot;,
+                    &quot;desc&quot;: &quot;Called every time an Instance is acquired. Use this to reset its state.&quot;,
+                    &quot;lua_type&quot;: &quot;(Instance) -&gt; ()&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;GoodPool&lt;Instance&gt;, Instance&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 97,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Get&quot;,
+            &quot;desc&quot;: &quot;Retrieves an object from the pool, passing it through `initFn` before returning.\n\nIf the pool is empty, a new object is created via `createFn`.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;T&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 137,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Preload&quot;,
+            &quot;desc&quot;: &quot;Pre-fills the pool with a given number of objects created via `createFn`.\n\nUseful for avoiding lag spikes on first use. Does nothing if `amount` is &lt;= 0.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;amount&quot;,
+                    &quot;desc&quot;: &quot;Number of objects to pre-fill the pool with.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 151,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Resize&quot;,
+            &quot;desc&quot;: &quot;Resizes the pool to the given amount.\n\nIf `newAmount` is greater than the current size, new objects are created via `Preload`.\nIf `newAmount` is less, excess objects are destroyed via `Clean`.\nDoes nothing if `newAmount` equals the current size.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;newAmount&quot;,
+                    &quot;desc&quot;: &quot;The desired pool size.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 172,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Clean&quot;,
+            &quot;desc&quot;: &quot;Destroys objects in the pool via `destroyFn`.\n\nIf `amount` is provided, only that many objects are destroyed.\nOtherwise, the entire pool is cleared.\n\nObjects that are currently in use (i.e. not yet returned) are not affected.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;amount&quot;,
+                    &quot;desc&quot;: &quot;Number of objects to destroy. Defaults to all objects in the pool.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 197,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;GetSize&quot;,
+            &quot;desc&quot;: &quot;Returns the number of objects currently sitting idle in the pool.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 213,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;IsEmpty&quot;,
+            &quot;desc&quot;: &quot;Returns `true` if the pool has no objects available, `false` otherwise.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 223,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Return&quot;,
+            &quot;desc&quot;: &quot;Returns an object back to the pool so it can be reused later.\n\n:::caution\nThis does not reset the object&#x27;s state. State reset is handled by\n`initFn` the next time the object is acquired via `Get`.\n:::&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;item&quot;,
+                    &quot;desc&quot;: &quot;The object to return.&quot;,
+                    &quot;lua_type&quot;: &quot;T&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 238,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;ReturnList&quot;,
+            &quot;desc&quot;: &quot;Returns a list of objects back to the pool so they can be reused later.\n\n:::caution\nThis does not reset the objects&#x27; state. State reset is handled by\n`initFn` the next time each object is acquired via `Get`.\n:::&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;list&quot;,
+                    &quot;desc&quot;: &quot;The objects to return to the pool.&quot;,
+                    &quot;lua_type&quot;: &quot;{T}&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 254,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;GoodPool&quot;,
+    &quot;desc&quot;: &quot;A flexible and lightweight generic object pool.\n\nGoodPool allows you to reuse objects instead of repeatedly creating\nand destroying them. You provide a function to create the object,\nanother to initialize it when acquired, and an optional one to\ndestroy it when the pool is cleaned.\n```lua\nlocal tblPool = GoodPool.new(\n\tfunction()\n\t\treturn { value = 10 }\n\tend,\n\tfunction(tbl)\n\t\ttbl.value = 10\n\tend\n)\n\nlocal obj = tblPool:Get()\nobj.value += 10\nprint(obj.value) -- 20\n\ntblPool:Return(obj)\nprint(tblPool:Get().value) -- 10\n```&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 27,
+        &quot;path&quot;: &quot;lib/init.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#Clean" class="table-of-contents__link toc-highlight">:Clean</a></li><li><a href="#Get" class="table-of-contents__link toc-highlight">:Get</a></li><li><a href="#GetSize" class="table-of-contents__link toc-highlight">:GetSize</a></li><li><a href="#IsEmpty" class="table-of-contents__link toc-highlight">:IsEmpty</a></li><li><a href="#Preload" class="table-of-contents__link toc-highlight">:Preload</a></li><li><a href="#Resize" class="table-of-contents__link toc-highlight">:Resize</a></li><li><a href="#Return" class="table-of-contents__link toc-highlight">:Return</a></li><li><a href="#ReturnList" class="table-of-contents__link toc-highlight">:ReturnList</a></li><li><a href="#forInstance" class="table-of-contents__link toc-highlight">.forInstance</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 thecogumeta. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

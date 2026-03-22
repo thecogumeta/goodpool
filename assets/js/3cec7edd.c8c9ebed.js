@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[73],{4410:o=>{o.exports=JSON.parse('{"sourceUrl":"https://github.com/thecogumeta/goodpool/blob/main","baseUrl":"/goodpool/","classOrder":[],"apiCategories":[]}')}}]);
